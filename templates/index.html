@@ -2,13 +2,19 @@
 
 {% extends "base.html" %}
 
-
 {% block content %}
-<div class="overflow-x-auto">
-    <div class="bg-primary-500">
-        <article class="prose">
-            <h1>Albion Online Market Data</h1>
-        <article/>
-    </div>
-</div>
+{% comment %} <div class="flex justify-center items-center h-screen"> {% endcomment %}
+    <article class="prose">
+        <div class="hero min-h-screen">
+            <div class="hero-content text-center">
+                <div class="max-w-md">
+                    <h1>Albion Online Market Mastery</h1>
+                    <p>Unleash your trading potential with real-time market data from every city. Make informed decisions and dominate the Albion economy!</p>
+                    <button class="btn btn-primary" onclick="window.location.href = '/table';">Explore Market Data</button>
+                    <button class="btn btn-secondary" onclick="window.location.href = '/tutorial';">Learn More & How It Works</button>
+                </div>
+            </div>
+        </div>
+    </article>
+{% comment %} </div> {% endcomment %}
 {% endblock content %}
