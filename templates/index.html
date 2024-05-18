@@ -1,20 +1,168 @@
-<!-- templates/index.html -->
-
-{% extends "base.html" %}
-
-{% block content %}
-{% comment %} <div class="flex justify-center items-center h-screen"> {% endcomment %}
-    <article class="prose">
-        <div class="hero min-h-screen">
-            <div class="hero-content text-center">
+{% extends "base.html" %} {% load custom_filters %} {% block content %}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="p-4">
+        <article class="prose">
+            <div
+                class="hero-content text-center drop-shadow-2xl rounded-2xl bg-amber-100 bg-opacity-65"
+            >
                 <div class="max-w-md">
                     <h1>Albion Online Market Mastery</h1>
-                    <p>Unleash your trading potential with real-time market data from every city. Make informed decisions and dominate the Albion economy!</p>
-                    <button class="btn btn-primary" onclick="window.location.href = '/table';">Explore Market Data</button>
-                    <button class="btn btn-secondary" onclick="window.location.href = '/tutorial';">Learn More & How It Works</button>
+                    <p>
+                        Unleash your trading potential with real-time market
+                        data from every city. Make informed decisions and
+                        dominate the Albion economy!
+                    </p>
+                    <button
+                        class="btn btn-primary"
+                        onclick="window.location.href = '/table';"
+                    >
+                        Explore Market Data
+                    </button>
+                    <button
+                        class="btn btn-secondary"
+                        onclick="window.location.href = '/tutorial';"
+                    >
+                        Learn More & How It Works
+                    </button>
                 </div>
             </div>
-        </div>
-    </article>
-{% comment %} </div> {% endcomment %}
+            <div class="p-12">
+                <article class="prose">
+                    <div class="hero-content text-center drop-shadow-2xl rounded-2xl bg-amber-200 bg-opacity-65">
+                        <div>
+                            <h1>Upcoming Features</h1>
+                            <h3>
+                                New Features that will be added in the future:
+                            </h3>
+                            <ul class="list-disc list-inside text-start">
+                                <li>Crafting Calculator for items, food, and potions</li>
+                                <li>Historical Price Annotations</li>
+                                <li>Private Market Data API (Discord Subscribers Only)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </article>
+    </div>
+    <div class="p-4">
+        <article class="prose">
+            <h1>Example Live Data from Bridgewatch and Caerleon</h1>
+            <table
+                class="bg-amber-300 bg-opacity-65 shadow-2xl rounded-lg table-xs w-full"
+            >
+                <tbody>
+                    <tr class="text-center hover">
+                        <th>Item ID</th>
+                        <th>City</th>
+                        <th>Quality</th>
+                        <th>Sell Price Min</th>
+                        <th>Sell Price Max</th>
+                        <th>Buy Price Min</th>
+                        <th>Buy Price Max</th>
+                    </tr>
+                    <tr class="text-center hover">
+                        <td>{{ "T4_BAG"|item_image }}</td>
+                        {{ "Bridgewatch"|colorize_city }}
+                        <td>{{ 1|quality_description}}</td>
+                        <td>4299</td>
+                        <td>4323</td>
+                        <td>{{ 1|quality_description}}</td>
+                        <td>{{ 1|quality_description}}</td>
+                    </tr>
+                    <tr class="text-center hover">
+                        <td>{{ "T4_BAG"|item_image }}</td>
+                        {{ "Bridgewatch"|colorize_city }}
+                        <td>{{ 2|quality_description}}</td>
+                        <td>4302</td>
+                        <td>4323</td>
+                        <td>2715</td>
+                        <td>2888</td>
+                    </tr>
+                    <tr class="text-center hover">
+                        <td>{{ "T4_BAG"|item_image }}</td>
+                        {{ "Bridgewatch"|colorize_city }}
+                        <td>{{ 3|quality_description}}</td>
+                        <td>4379</td>
+                        <td>4379</td>
+                        <td>9</td>
+                        <td>2605</td>
+                    </tr>
+                    <tr class="text-center hover">
+                        <td>{{ "T4_BAG"|item_image }}</td>
+                        {{ "Bridgewatch"|colorize_city }}
+                        <td>{{ 4|quality_description}}</td>
+                        <td>5599</td>
+                        <td>7685</td>
+                        <td>2753</td>
+                        <td>2851</td>
+                    </tr>
+                    <tr class="text-center hover">
+                        <td>{{ "T4_BAG"|item_image }}</td>
+                        {{ "Bridgewatch"|colorize_city }}
+                        <td>{{ 5|quality_description}}</td>
+                        <td>13788</td>
+                        <td>27994</td>
+                        <td>4011</td>
+                        <td>4017</td>
+                    </tr>
+                    <tr class="text-center hover">
+                        <td>{{ "T4_BAG"|item_image }}</td>
+                        {{ "Caerleon"|colorize_city }}
+                        <td>{{ 1|quality_description}}</td>
+                        <td>4300</td>
+                        <td>4300</td>
+                        <td>4</td>
+                        <td>3509</td>
+                    </tr>
+                    <tr class="text-center hover">
+                        <td>{{ "T4_BAG"|item_image }}</td>
+                        {{ "Caerleon"|colorize_city }}
+                        <td>{{ 2|quality_description}}</td>
+                        <td>4300</td>
+                        <td>4500</td>
+                        <td>3003</td>
+                        <td>3601</td>
+                    </tr>
+                    <tr class="text-center hover">
+                        <td>{{ "T4_BAG"|item_image }}</td>
+                        {{ "Caerleon"|colorize_city }}
+                        <td>{{ 3|quality_description}}</td>
+                        <td>4000</td>
+                        <td>5135</td>
+                        <td>3411</td>
+                        <td>3475</td>
+                    </tr>
+                    <tr class="text-center hover">
+                        <td>{{ "T4_BAG"|item_image }}</td>
+                        {{ "Caerleon"|colorize_city }}
+                        <td>{{ 4|quality_description}}</td>
+                        <td>6500</td>
+                        <td>9000</td>
+                        <td>3913</td>
+                        <td>4602</td>
+                    </tr>
+                    <tr class="text-center hover">
+                        <td>{{ "T4_BAG"|item_image }}</td>
+                        {{ "Caerleon"|colorize_city }}
+                        <td>{{ 5|quality_description}}</td>
+                        <td>13000</td>
+                        <td>19800</td>
+                        <td>5000</td>
+                        <td>5000</td>
+                    </tr>
+                    <tr class="text-center hover">
+                        <td>{{ "T5_BAG"|item_image}}</td>
+                        {{ "Bridgewatch"|colorize_city }}
+                        <td>{{ 1|quality_description}}</td>
+                        <td>20914</td>
+                        <td>22922</td>
+                        <td>{{ 1|quality_description}}</td>
+                        <td>16290</td>
+                    </tr>
+                </tbody>
+            </table>
+        </article>
+    </div>
+</div>
 {% endblock content %}
