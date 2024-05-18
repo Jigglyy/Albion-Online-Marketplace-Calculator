@@ -10,12 +10,11 @@
         <title>Albion Online Market Data</title>
         <link rel="stylesheet" href="{% static 'src/styles.css' %}" />
     </head>
-
     <body data-theme="retro">
-        <div class="min-h-screen pb-16"> <!-- Added padding-bottom here -->
+        <div class="min-h-screen pb-16">
             {% block content %} {% endblock content %}
         </div>
-        <div class="btm-nav fixed bottom-0 w-full bg-amber-100 shadow-lg"> <!-- Updated -->
+        <div class="btm-nav fixed bottom-0 w-full bg-amber-100 shadow-lg">
             <button
                 class="{% if current_page == 'index' %}active disabled{% endif %}"
                 onclick="window.location.href = '/';"
