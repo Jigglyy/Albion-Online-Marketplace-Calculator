@@ -12,7 +12,10 @@
     </head>
 
     <body data-theme="retro">
-        <div class="btm-nav">
+        <div class="min-h-screen pb-16"> <!-- Added padding-bottom here -->
+            {% block content %} {% endblock content %}
+        </div>
+        <div class="btm-nav fixed bottom-0 w-full bg-amber-100 shadow-lg"> <!-- Updated -->
             <button
                 class="{% if current_page == 'index' %}active disabled{% endif %}"
                 onclick="window.location.href = '/';"
@@ -74,6 +77,5 @@
                 <span class="btm-nav-label">Market Data</span>
             </button>
         </div>
-        {% block content %} {% endblock content %}
     </body>
 </html>
