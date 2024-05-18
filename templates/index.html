@@ -1,9 +1,8 @@
 {% extends "base.html" %} {% load custom_filters %} {% block content %}
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <div class="p-4 pl-8">
-        <article class="prose">
             <div
-                class="hero-content text-center drop-shadow-2xl rounded-2xl bg-amber-100 bg-opacity-65"
+                class="prose prose-lg hero-content text-center drop-shadow-2xl rounded-2xl bg-amber-100 bg-opacity-65"
             >
                 <div class="max-w-md">
                     <h1>Albion Online Market Mastery</h1>
@@ -27,9 +26,8 @@
                 </div>
             </div>
             <div class="p-12">
-                <article class="prose">
                     <div
-                        class="hero-content text-center drop-shadow-2xl rounded-2xl bg-amber-200 bg-opacity-65"
+                        class="prose prose-sm hero-content text-center drop-shadow-2xl rounded-2xl bg-amber-200 bg-opacity-65"
                     >
                         <div>
                             <h1>Upcoming Features</h1>
@@ -49,13 +47,10 @@
                             </ul>
                         </div>
                     </div>
-                </article>
             </div>
-        </article>
     </div>
-    <div class="p-4 pl-44">
-        <article class="prose">
-            <h1>Example Live Data from Bridgewatch and Caerleon</h1>
+    <div class="prose prose-2xl p-6 pl-32">
+            <h2>Example Live Data from Bridgewatch and Caerleon</h2>
             <table
                 class="bg-amber-300 bg-opacity-65 shadow-2xl rounded-lg table-xs w-full"
             >
@@ -170,7 +165,6 @@
                     </tr>
                 </tbody>
             </table>
-        </article>
     </div>
 </div>
 {% endblock content %}
