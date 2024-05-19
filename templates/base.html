@@ -11,10 +11,11 @@
         <link rel="stylesheet" href="{% static 'src/styles.css' %}" />
     </head>
     <body data-theme="retro">
-        <div class="min-h-screen pb-16">
-            {% block content %} {% endblock content %}
-        </div>
+        <!-- Main content -->
+        {% block content %} {% endblock content %}
+        <!-- Bottom navigation -->
         <div class="btm-nav fixed bottom-0 w-full bg-amber-100 shadow-lg">
+            <!-- Home button -->
             <button
                 class="{% if current_page == 'index' %}active disabled{% endif %}"
                 onclick="window.location.href = '/';"
@@ -35,6 +36,8 @@
                 </svg>
                 <span class="btm-nav-label">Home</span>
             </button>
+
+            <!-- How To button -->
             <button
                 class="{% if current_page == 'tutorial' %}active disabled{% endif %}"
                 onclick="window.location.href = '/tutorial';"
@@ -55,6 +58,8 @@
                 </svg>
                 <span class="btm-nav-label">How To</span>
             </button>
+
+            <!-- Market Data button -->
             <button
                 class="{% if current_page == 'table' %}active disabled{% endif %}"
                 onclick="window.location.href = '/table';"

@@ -25,7 +25,6 @@ def colorize_city(value):
 def item_image(item_id):
     base_url = "https://render.albiononline.com/v1/item/"
     return mark_safe(
-        f'<div class="flex flex-col items-center">'
         f'<img src="{base_url}{item_id}" alt="{item_id}" title="{item_id}" style="width: 20px; height: 20px; display: block; margin: auto;">'
         f'<span class="text-xs">{item_id}</span>'
         f'</div>'
@@ -42,3 +41,11 @@ def quality_description(value):
     }
     description, style = quality_map.get(str(value), (value, ''))
     return mark_safe(f'<span style="{style}">{description}</span>')
+
+@register.filter(name='item_image_crafting')
+def item_image(item_id):
+    base_url = "https://render.albiononline.com/v1/item/"
+    return mark_safe(
+        f'<img src="{base_url}{item_id}" alt="{item_id}" title="{item_id}" style="width: 20px; height: 20px; display: block; margin: auto;">'
+        f'</div>'
+    )

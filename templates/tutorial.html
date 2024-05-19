@@ -1,29 +1,32 @@
 <!-- templates/tutorial.html -->
 
 {% extends "base.html" %} {% block content %}
-<article class="prose mx-auto mt-8">
+<article class="prose mx-auto mt-8 w-auto">
     <body>
         <div
             class="hero-content text-center drop-shadow-2xl rounded-2xl bg-amber-100 bg-opacity-65"
         >
-            <h3>
+            <h3 class="drop-shadow-lg">
+                <!-- Introduction -->
                 Albion Online Market Mastery is a platform that relies on the
                 Albion Data Client to gather market information. If you want to
                 update the information yourself, follow the steps listed below.
             </h3>
         </div>
-        <h1 class="mt-8">How to Set Up and Use the Albion Data Client</h1>
+        <h1 class="mt-8 drop-shadow-lg">How to Set Up and Use the Albion Data Client</h1>
 
-        <h2>Introduction</h2>
+        <h2 class="drop-shadow-lg">Introduction</h2>
         <p>
+            <!-- Description of Albion Data Client -->
             The Albion Data Client is a tool that allows players to collect and
             share market data from Albion Online. This data can be used to track
             price trends, analyze market behavior, and manage in-game trading
             strategies more effectively.
         </p>
 
-        <h2>Step 1: Download the Albion Data Client</h2>
+        <h2 class="drop-shadow-lg">Step 1: Download the Albion Data Client</h2>
         <p>
+            <!-- Download link for Albion Data Client -->
             To get started, download the Albion Data Client from the official
             GitHub repository. You can find the latest release
             <a
@@ -33,10 +36,11 @@
             >.
         </p>
 
-        <h2>Step 2: Installation</h2>
-        <h3>Windows</h3>
+        <h2 class="drop-shadow-lg">Step 2: Installation</h2>
+        <h3 class="drop-shadow-lg">Windows</h3>
         <ol>
             <li>
+                <!-- Windows installation steps -->
                 Download the Windows installer from the GitHub releases page.
             </li>
             <li>Run the installer and follow the on-screen instructions.</li>
@@ -45,9 +49,10 @@
                 Menu or desktop shortcut.
             </li>
         </ol>
-        <h3>Mac/Linux</h3>
+        <h3 class="drop-shadow-lg">Mac/Linux</h3>
         <ol>
             <li>
+                <!-- Mac/Linux installation steps -->
                 Ensure you have Go installed on your system. You can download it
                 from
                 <a href="https://golang.org/dl/" target="_blank">here</a>.
@@ -68,8 +73,9 @@ go build -o albiondata-client cmd/albiondata-client/main.go</code></pre>
             </li>
         </ol>
 
-        <h2>Step 3: Configuration</h2>
+        <h2 class="drop-shadow-lg">Step 3: Configuration</h2>
         <p>
+            <!-- Configuration instructions -->
             After installation, you can configure the Albion Data Client using
             command-line parameters. For example:
         </p>
@@ -83,16 +89,18 @@ go build -o albiondata-client cmd/albiondata-client/main.go</code></pre>
             >.
         </p>
 
-        <h2>Step 4: Running the Client</h2>
+        <h2 class="drop-shadow-lg">Step 4: Running the Client</h2>
         <p>
+            <!-- Running the client instructions -->
             Once the Albion Data Client is installed and configured, simply run
             the application. It will start capturing market data as you play
             Albion Online. Ensure the client is running in the background while
             you are in the game to collect data effectively.
         </p>
 
-        <h2>Troubleshooting</h2>
+        <h2 class="drop-shadow-lg">Troubleshooting</h2>
         <p>
+            <!-- Troubleshooting instructions -->
             If you encounter any issues with the Albion Data Client, refer to
             the troubleshooting section on the
             <a href="https://www.albion-online-data.com" target="_blank"
@@ -102,16 +110,18 @@ go build -o albiondata-client cmd/albiondata-client/main.go</code></pre>
         </p>
 
         <div class="mt-8">
-            <h2>Using the Data</h2>
+            <h2 class="drop-shadow-lg">Using the Data</h2>
             <p>
+                <!-- Description of using the data -->
                 The data collected by the Albion Data Client is uploaded to a
-                central server and this data is made available to the public and then processed on
-                our website.
+                central server and this data is made available to the public and
+                then processed on our website.
             </p>
             <p>
                 By using our website, you can track historical prices, analyze
                 market trends, and make informed trading decisions.
             </p>
+            <div class="h-12"></div>
         </div>
     </body>
 </article>

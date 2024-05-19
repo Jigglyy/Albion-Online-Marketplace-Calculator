@@ -1,124 +1,140 @@
+<!-- templates/index.html -->
+
 {% extends "base.html" %} {% load custom_filters %} {% block content %}
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <div class="p-4 pl-8">
+        <!-- Hero section -->
+        <div
+            class="prose prose-lg hero-content text-center drop-shadow-2xl rounded-2xl bg-amber-100 bg-opacity-65"
+        >
+            <div class="max-w-md">
+                <h1 class="drop-shadow-lg">Albion Online Market Mastery</h1>
+                <p>
+                    Unleash your trading potential with real-time market
+                    data from every city. Make informed decisions and
+                    dominate the Albion economy!
+                </p>
+                <button
+                    class="btn btn-primary drop-shadow-lg"
+                    onclick="window.location.href = '/table';"
+                >
+                    Explore Market Data
+                </button>
+                <button
+                    class="btn btn-secondary drop-shadow-lg"
+                    onclick="window.location.href = '/tutorial';"
+                >
+                    Learn More & How It Works
+                </button>
+            </div>
+        </div>
+        <!-- Upcoming features section -->
+        <div class="p-12">
             <div
-                class="prose prose-lg hero-content text-center drop-shadow-2xl rounded-2xl bg-amber-100 bg-opacity-65"
+                class="prose prose-sm hero-content text-center drop-shadow-2xl rounded-2xl bg-amber-200 bg-opacity-65"
             >
-                <div class="max-w-md">
-                    <h1>Albion Online Market Mastery</h1>
-                    <p>
-                        Unleash your trading potential with real-time market
-                        data from every city. Make informed decisions and
-                        dominate the Albion economy!
-                    </p>
-                    <button
-                        class="btn btn-primary"
-                        onclick="window.location.href = '/table';"
-                    >
-                        Explore Market Data
-                    </button>
-                    <button
-                        class="btn btn-secondary"
-                        onclick="window.location.href = '/tutorial';"
-                    >
-                        Learn More & How It Works
-                    </button>
+                <div>
+                    <h1 class="drop-shadow-lg">Upcoming Features</h1>
+                    <h3 class="drop-shadow-lg">
+                        New Features that will be added in the future:
+                    </h3>
+                    <ul class="list-disc list-inside text-start">
+                        <li>
+                            Crafting Calculator for Items ⚔, Food 🍔, and
+                            Potions 🧪
+                        </li>
+                        <li>Historical Price Increase/Decrease Annotations 📈</li>
+                        <li>
+                            Market Trend Data Analysis 📊
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div class="p-12">
-                    <div
-                        class="prose prose-sm hero-content text-center drop-shadow-2xl rounded-2xl bg-amber-200 bg-opacity-65"
-                    >
-                        <div>
-                            <h1>Upcoming Features</h1>
-                            <h3>
-                                New Features that will be added in the future:
-                            </h3>
-                            <ul class="list-disc list-inside text-start">
-                                <li>
-                                    Crafting Calculator for Items ⚔, Food 🍔, and
-                                    Potions 🧪
-                                </li>
-                                <li>Historical Price Increase/Decrease Annotations 📈</li>
-                                <li>
-                                    Market Trend Data Analysis 📊
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-            </div>
+        </div>
     </div>
     <div class="prose prose-2xl p-6 pl-32">
-            <h2>Example Live Data from Bridgewatch and Caerleon</h2>
-            <table
-                class="bg-amber-300 bg-opacity-65 shadow-2xl rounded-lg table table-sm"
-            >
-                <tbody>
-                    <tr class="text-center hover">
-                        <th>Item ID</th>
-                        <th>City</th>
-                        <th>Quality</th>
-                        <th>Sell Price Min</th>
-                        <th>Sell Price Max</th>
-                        <th>Buy Price Min</th>
-                        <th>Buy Price Max</th>
-                    </tr>
-                    <tr class="text-center hover">
-                        <td>{{ "T4_BAG"|item_image }}</td>
-                        {{ "Bridgewatch"|colorize_city }}
-                        <td>{{ 1|quality_description}}</td>
-                        <td>4299</td>
-                        <td>4323</td>
-                        <td>1013</td>
-                        <td>1200</td>
-                    </tr>
-                    <tr class="text-center hover">
-                        <td>{{ "T4_BAG"|item_image }}</td>
-                        {{ "Bridgewatch"|colorize_city }}
-                        <td>{{ 2|quality_description}}</td>
-                        <td>4302</td>
-                        <td>4323</td>
-                        <td>2715</td>
-                        <td>2888</td>
-                    </tr>
-                    <tr class="text-center hover">
-                        <td>{{ "T4_BAG"|item_image }}</td>
-                        {{ "Bridgewatch"|colorize_city }}
-                        <td>{{ 3|quality_description}}</td>
-                        <td>4379</td>
-                        <td>4379</td>
-                        <td>1030</td>
-                        <td>2605</td>
-                    </tr>
-                    <tr class="text-center hover">
-                        <td>{{ "T4_BAG"|item_image }}</td>
-                        {{ "Bridgewatch"|colorize_city }}
-                        <td>{{ 4|quality_description}}</td>
-                        <td>5599</td>
-                        <td>7685</td>
-                        <td>2753</td>
-                        <td>2851</td>
-                    </tr>
-                    <tr class="text-center hover">
-                        <td>{{ "T4_BAG"|item_image }}</td>
-                        {{ "Bridgewatch"|colorize_city }}
-                        <td>{{ 5|quality_description}}</td>
-                        <td>13788</td>
-                        <td>27994</td>
-                        <td>4011</td>
-                        <td>4017</td>
-                    </tr>
-                    <tr class="text-center hover">
-                        <td>{{ "T4_BAG"|item_image }}</td>
-                        {{ "Caerleon"|colorize_city }}
-                        <td>{{ 1|quality_description}}</td>
-                        <td>4300</td>
-                        <td>4300</td>
-                        <td>1400</td>
-                        <td>3509</td>
-                    </tr>
-                </tbody>
-            </table>
+        <!-- Example Live Data section -->
+        <h2 class="drop-shadow-lg">Example Live Data from Bridgewatch and Caerleon</h2>
+        <table
+            class="bg-amber-200 bg-opacity-65 shadow-2xl rounded-lg table table-sm"
+        >
+            <tbody>
+                <tr class="text-center hover">
+                    <th>Item ID</th>
+                    <th>City</th>
+                    <th>Quality</th>
+                    <th>Sell Price Min</th>
+                    <th>Sell Price Max</th>
+                    <th>Buy Price Min</th>
+                    <th>Buy Price Max</th>
+                </tr>
+                <!-- Bridgewatch data -->
+                <tr class="text-center hover">
+                    <td>{{ "T4_BAG"|item_image }}</td>
+                    {{ "Bridgewatch"|colorize_city }}
+                    <td>{{ 1|quality_description}}</td>
+                    <td>4299</td>
+                    <td>4323</td>
+                    <td>1013</td>
+                    <td>1200</td>
+                </tr>
+                <tr class="text-center hover">
+                    <td>{{ "T4_BAG"|item_image }}</td>
+                    {{ "Bridgewatch"|colorize_city }}
+                    <td>{{ 2|quality_description}}</td>
+                    <td>4302</td>
+                    <td>4323</td>
+                    <td>2715</td>
+                    <td>2888</td>
+                </tr>
+                <tr class="text-center hover">
+                    <td>{{ "T4_BAG"|item_image }}</td>
+                    {{ "Bridgewatch"|colorize_city }}
+                    <td>{{ 3|quality_description}}</td>
+                    <td>4379</td>
+                    <td>4379</td>
+                    <td>1030</td>
+                    <td>2605</td>
+                </tr>
+                <tr class="text-center hover">
+                    <td>{{ "T4_BAG"|item_image }}</td>
+                    {{ "Bridgewatch"|colorize_city }}
+                    <td>{{ 4|quality_description}}</td>
+                    <td>5599</td>
+                    <td>7685</td>
+                    <td>2753</td>
+                    <td>2851</td>
+                </tr>
+                <tr class="text-center hover">
+                    <td>{{ "T4_BAG"|item_image }}</td>
+                    {{ "Bridgewatch"|colorize_city }}
+                    <td>{{ 5|quality_description}}</td>
+                    <td>13788</td>
+                    <td>27994</td>
+                    <td>4011</td>
+                    <td>4017</td>
+                </tr>
+                <!-- Caerleon data -->
+                <tr class="text-center hover">
+                    <td>{{ "T4_BAG"|item_image }}</td>
+                    {{ "Caerleon"|colorize_city }}
+                    <td>{{ 1|quality_description}}</td>
+                    <td>4300</td>
+                    <td>4300</td>
+                    <td>1400</td>
+                    <td>3509</td>
+                </tr>
+                <tr class="text-center hover">
+                    <td>{{ "T4_BAG"|item_image }}</td>
+                    {{ "Caerleon"|colorize_city }}
+                    <td>{{ 2|quality_description}}</td>
+                    <td>4412</td>
+                    <td>4441</td>
+                    <td>1413</td>
+                    <td>3801</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock content %}
