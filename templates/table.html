@@ -1,116 +1,187 @@
 {% extends "base.html" %} {% load custom_filters %} {% block content %}
 <div id="content-wrapper" class="bg-amber-100/50 shadow-lg">
-<div class="prose">
-    <h1 class="drop-shadow-lg">Albion Online Market Data</h1>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 pl-2">
-    <!-- Item Image -->
-    <div class="flex justify-center lg:justify-start lg:col-span-1 mt-4">
-        <img
-            id="item-image"
-            src="https://render.albiononline.com/v1/item/T7_MAIN_HOLYSTAFF"
-            alt="Item Image"
-            class="h-28 w-28"
-        />
+    <div class="prose">
+        <h1 class="drop-shadow-lg">Albion Online Market Data</h1>
     </div>
-    <!-- Items and Quantity -->
-    <div class="col-span-1 lg:col-span-2 space-y-4">
-        <div>
-            <label for="item-select" class="prose label drop-shadow-lg"
-                ><h4 class="prose">Item:</h4></label
-            >
-            <select
-                id="item-select"
-                class="prose select select-bordered select-sm w-full bg-amber-100 shadow-lg"
-            >
-                {% for item in items %}
-                <option value="{{ item }}">{{ item }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div>
-            <label for="quantity-select" class="prose label drop-shadow-lg"
-                ><h4 class="prose">Quantity:</h4></label
-            >
-            <input
-                id="quantity-select"
-                type="number"
-                placeholder="Quantity"
-                class="prose input input-bordered w-full bg-amber-100 shadow-lg"
-                max="1000"
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 pl-2">
+        <!-- Item Image -->
+        <div class="flex justify-center lg:justify-start lg:col-span-1 mt-4">
+            <img
+                id="item-image"
+                src="https://render.albiononline.com/v1/item/T7_MAIN_HOLYSTAFF"
+                alt="Item Image"
+                class="h-28 w-28"
             />
         </div>
+        <!-- Items and Quantity -->
+        <div class="col-span-1 lg:col-span-2 space-y-4">
+            <div>
+                <label for="item-select" class="prose label drop-shadow-lg"
+                    ><h4 class="prose">Item:</h4></label
+                >
+                <select
+                    id="item-select"
+                    class="prose select select-bordered select-sm w-full bg-amber-100 shadow-lg"
+                >
+                    {% for value in items.values %}
+                    <option value="{{ value }}">{{ value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="quantity-select" class="prose label drop-shadow-lg"
+                    ><h4 class="prose">Quantity:</h4></label
+                >
+                <input
+                    id="quantity-select"
+                    type="number"
+                    placeholder="Quantity"
+                    class="prose input input-bordered w-full bg-amber-100 shadow-lg"
+                    max="1000"
+                />
+            </div>
+        </div>
+        <!-- Quality and Station Fee -->
+        <div class="col-span-1 lg:col-span-1 space-y-4">
+            <div>
+                <label for="quality-select" class="prose label drop-shadow-lg"
+                    ><h4 class="prose">Quality:</h4></label
+                >
+                <select
+                    id="quality-select"
+                    class="prose select select-bordered select-sm w-full bg-amber-100 shadow-lg"
+                >
+                    <option>Normal</option>
+                    <option>Good</option>
+                    <option>Outstanding</option>
+                    <option>Excellent</option>
+                    <option>Masterpiece</option>
+                </select>
+            </div>
+            <div>
+                <label for="station-fee" class="prose label drop-shadow-lg"
+                    ><h4 class="prose">Station Fee:</h4></label
+                >
+                <input
+                    id="station-fee"
+                    type="number"
+                    placeholder="0-1000"
+                    class="prose input input-bordered w-full bg-amber-100 shadow-lg"
+                    max="1000"
+                />
+            </div>
+        </div>
+        <!-- Zone and Hideout -->
+        <div class="col-span-1 lg:col-span-1 space-y-4">
+            <div>
+                <label for="zone-select" class="prose label drop-shadow-lg"
+                    ><h4 class="prose">Quality:</h4></label
+                >
+                <select
+                    id="zone-select"
+                    class="prose select select-bordered select-sm w-full bg-amber-100 shadow-lg"
+                >
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                </select>
+            </div>
+            <div>
+                <label for="ho-power" class="prose label drop-shadow-lg"
+                    ><h4 class="prose">Hideout Power</h4></label
+                >
+                <select
+                    id="ho-power"
+                    class="prose select select-bordered select-sm w-full bg-amber-100 shadow-lg"
+                >
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                </select>
+            </div>
+        </div>
+        <!-- Daily Bonus & Return Rate -->
+        <div class="col-span-1 lg:col-span-1 space-y-4">
+            <div>
+                <label for="daily-bonus" class="prose label drop-shadow-lg"
+                    ><h4 class="prose">Daily Bonus:</h4></label
+                >
+                <select
+                    id="daily-bonus"
+                    class="prose select select-bordered select-sm w-full bg-amber-100 shadow-lg"
+                >
+                    <option>None</option>
+                    <option>10%</option>
+                    <option>20%</option>
+                </select>
+            </div>
+            <div>
+                <label for="return-rate" class="prose label drop-shadow-lg"
+                    ><h4 class="prose">Return Rate</h4></label
+                >
+                <input
+                    id="return-rate"
+                    class="prose input input-bordered select-sm w-full bg-amber-100 shadow-lg"
+                    type="number"
+                    disabled
+                />
+            </div>
+        </div>
+        <!-- Buy Mats & Sell mats -->
+        <div class="col-span-1 lg:col-span-1 space-y-4">
+            <div>
+                <label for="buy-mats" class="prose label drop-shadow-lg"
+                    ><h4 class="prose">Buy Mats:</h4></label
+                >
+                <select
+                    id="buy-mats"
+                    class="prose select select-bordered select-sm w-full bg-amber-100 shadow-lg"
+                >
+                    <option>Bridgewatch</option>
+                    <option>Fort Sterling</option>
+                    <option>Lymhurst</option>
+                    <option>Caerleon</option>
+                    <option>Martlock</option>
+                    <option>Thetford</option>
+                </select>
+            </div>
+            <div>
+                <label for="sell-mats" class="prose label drop-shadow-lg"
+                    ><h4 class="prose">Sell Mats</h4></label
+                >
+                <select
+                    id="sell-mats"
+                    class="prose select select-bordered select-sm w-full bg-amber-100 shadow-lg"
+                >
+                    <option>Bridgewatch</option>
+                    <option>Fort Sterling</option>
+                    <option>Lymhurst</option>
+                    <option>Caerleon</option>
+                    <option>Martlock</option>
+                    <option>Thetford</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-span-1 lg:col-span-2 space-y-4 p-2">
+            <button
+                type="submit"
+                id="search-button"
+                class="prose btn btn-xs sm:btn-sm md:btn-md lg:btn-lg bg-amber-100 mt-16"
+            >
+                Search
+            </button>
+        </div>
     </div>
-    <!-- Quality and Station Fee -->
-    <div class="col-span-1 lg:col-span-2 space-y-4">
-        <div>
-            <label for="quality-select" class="prose label drop-shadow-lg"
-                ><h4 class="prose">Quality:</h4></label
-            >
-            <select
-                id="quality-select"
-                class="prose select select-bordered select-sm w-full bg-amber-100 shadow-lg"
-            >
-                <option>Normal</option>
-                <option>Good</option>
-                <option>Outstanding</option>
-                <option>Excellent</option>
-                <option>Masterpiece</option>
-            </select>
-        </div>
-        <div>
-            <label for="station-fee" class="prose label drop-shadow-lg"
-                ><h4 class="prose">Station Fee:</h4></label
-            >
-            <input
-                id="station-fee"
-                type="number"
-                placeholder="0-1000"
-                class="prose input input-bordered w-full bg-amber-100 shadow-lg"
-                max="1000"
-            />
-        </div>
-    </div>
-    <!-- Zone and Hideout -->
-    <div class="col-span-1 lg:col-span-2 space-y-4">
-        <div>
-            <label for="zone-select" class="prose label drop-shadow-lg"
-                ><h4 class="prose">Quality:</h4></label
-            >
-            <select
-                id="zone-select"
-                class="prose select select-bordered select-sm w-full bg-amber-100 shadow-lg"
-            >
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-            </select>
-        </div>
-        <div>
-            <label for="ho-power" class="prose label drop-shadow-lg"
-                ><h4 class="prose">Hideout Power</h4></label
-            >
-            <select
-                id="ho-power"
-                class="prose select select-bordered select-sm w-full bg-amber-100 shadow-lg"
-            >
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-            </select>
-        </div>
-    </div>
-</div>
-<div class="bg-base-content/10 my-10 h-2"></div>
+    <div class="bg-base-content/10 my-10 h-2"></div>
 </div>
 
 <script>
@@ -139,9 +210,11 @@
 
             if (stationFee.value > 1000) {
                 stationFee.value = 1000;
+            } else if (stationFee.value < 0) {
+                stationFee.value = 0;
             }
         }
-        
+
         // Attach the event listener to the station fee input element
         const stationFeeInput = document.getElementById("station-fee");
         stationFeeInput.addEventListener("change", updateStationFee);
