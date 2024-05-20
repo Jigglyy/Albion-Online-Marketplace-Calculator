@@ -23,8 +23,8 @@
                     id="item-select"
                     class="prose select select-bordered select-sm w-full bg-amber-100 shadow-lg"
                 >
-                    {% for value in items.values %}
-                    <option value="{{ value }}">{{ value }}</option>
+                    {% for key, value in items.items %}
+                    <option value="{{ value }}" data-key="{{ key }}">{{ value }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -75,7 +75,7 @@
         <div class="col-span-1 lg:col-span-1 space-y-4">
             <div>
                 <label for="zone-select" class="prose label drop-shadow-lg"
-                    ><h4 class="prose">Quality:</h4></label
+                    ><h4 class="prose">Zone Quality:</h4></label
                 >
                 <select
                     id="zone-select"
@@ -171,6 +171,26 @@
                 </select>
             </div>
         </div>
+        <div class="col-span-1 lg:col-span-1">
+            <label for="city-price-selection" class="prose label drop-shadow-lg"
+                    ><h4 class="prose">City to Sell</h4></label
+                >
+                <select
+                    id="city-price-selection"
+                    class="prose select select-bordered select-sm w-full bg-amber-100 shadow-lg"
+                >
+                    <option>Bridgewatch</option>
+                    <option>Fort Sterling</option>
+                    <option>Lymhurst</option>
+                    <option>Caerleon</option>
+                    <option>Martlock</option>
+                    <option>Thetford</option>
+                </select>
+            <label for="focus-check" class="prose label drop-shadow-lg mt-12"
+                    ><h4 class="prose">Use Focus</h4><input type="checkbox" checked="unchecked" id="focus-check" class="checkbox mr-8 mb-1"/></label
+                >
+        </div>
+        <!-- Search Button -->
         <div class="col-span-1 lg:col-span-2 space-y-4 p-2">
             <button
                 type="submit"
@@ -180,9 +200,11 @@
                 Search
             </button>
         </div>
+        <!-- City -->
     </div>
     <div class="bg-base-content/10 my-10 h-2"></div>
 </div>
+<div id="results" class="mt-4"></div>
 
 <script>
     document.addEventListener("DOMContentLoaded", (event) => {
@@ -203,8 +225,7 @@
 
         // Initialize the image with the first item's image
         updateItemImage();
-    });
-    document.addEventListener("DOMContentLoaded", (event) => {
+
         function updateStationFee() {
             const stationFee = document.getElementById("station-fee");
 
@@ -218,7 +239,75 @@
         // Attach the event listener to the station fee input element
         const stationFeeInput = document.getElementById("station-fee");
         stationFeeInput.addEventListener("change", updateStationFee);
+
+        // Handle the search button click
+        const searchButton = document.getElementById("search-button");
+        searchButton.addEventListener("click", async () => {
+            const selectedItemId = itemSelect.options[itemSelect.selectedIndex].getAttribute("data-key");
+            const qualitySelect = document.getElementById("quality-select");
+            const selectedQuality = qualitySelect.value;
+            const selectedCity = document.getElementById("city-price-selection").value;
+            const qualityToNumber = {
+                Normal: 1,
+                Good: 2,
+                Outstanding: 3,
+                Excellent: 4,
+                Masterpiece: 5
+            };
+            const selectedQualityNumber = qualityToNumber[selectedQuality];
+            const url = `https://europe.albion-online-data.com/api/v2/stats/prices/T4_${selectedItemId},T5_${selectedItemId},T6_${selectedItemId},T7_${selectedItemId},T8_${selectedItemId}?locations=${selectedCity}&qualities=${selectedQualityNumber}`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                console.log(data);
+                displayResults(data);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        });
+
+        function displayResults(data) {
+            const resultsDiv = document.getElementById("results");
+            resultsDiv.innerHTML = "";
+
+            // Create a table element
+            const table = document.createElement("table");
+            table.classList.add("table", "w-full");
+
+            // Create table header
+            const thead = document.createElement("thead");
+            thead.innerHTML = `
+                <tr>
+                    <th>Item ID</th>
+                    <th>City</th>
+                    <th>Quality</th>
+                    <th>Sell Price</th>
+                    <th>Buy Price</th>
+                    <th>Updated</th>
+                </tr>
+            `;
+            table.appendChild(thead);
+
+            // Create table body
+            const tbody = document.createElement("tbody");
+
+            data.forEach(item => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${item.item_id}</td>
+                    <td>${item.city}</td>
+                    <td>${item.quality}</td>
+                    <td>${item.sell_price_min}</td>
+                    <td>${item.buy_price_max}</td>
+                    <td>${new Date(item.sell_price_min_date).toLocaleString()}</td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            table.appendChild(tbody);
+            resultsDiv.appendChild(table);
+        }
     });
 </script>
-
 {% endblock content %}
