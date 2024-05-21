@@ -207,6 +207,9 @@
 <div id="results" class="mt-4"></div>
 
 <script>
+    // Pass the items dictionary to JavaScript
+    const itemsDict = {{ items|safe }};
+
     document.addEventListener("DOMContentLoaded", (event) => {
         function updateItemImage() {
             const itemSelect = document.getElementById("item-select");
@@ -260,7 +263,6 @@
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                console.log(data);
                 displayResults(data);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -273,12 +275,12 @@
 
             // Create a table element
             const table = document.createElement("table");
-            table.classList.add("table", "w-full");
+            table.classList.add("table", "table-zebra", "w-full");
 
             // Create table header
             const thead = document.createElement("thead");
             thead.innerHTML = `
-                <tr>
+                <tr class="prose">
                     <th>Item ID</th>
                     <th>City</th>
                     <th>Quality</th>
@@ -291,13 +293,27 @@
 
             // Create table body
             const tbody = document.createElement("tbody");
+            const body = document.getElementById("the-body");
+
+            const spacer = document.createElement("div");
+            spacer.classList.add("h-20");
 
             data.forEach(item => {
+                // Strip the first three characters from the item ID
+                const itemId = item.item_id.toString();
+                console.log(itemId)
+                const strippedItemId = item.item_id.substring(3);
+                const strippedItemTier = item.item_id.substring(0, 2);
+                const itemName = itemsDict[strippedItemId];
+                const cityHtml = colorizeCity(item.city);
+                const qualityHtml = qualityDescription(item.quality);
+
                 const row = document.createElement("tr");
+                row.classList.add("prose");
                 row.innerHTML = `
-                    <td>${item.item_id}</td>
-                    <td>${item.city}</td>
-                    <td>${item.quality}</td>
+                    <td><img src="https://render.albiononline.com/v1/item/${itemId}" alt="${itemId}" title="${itemId}" style="width: 50px; height: 50px; display: block; margin-top: 5px">${strippedItemTier} ${itemName}</td>
+                    ${cityHtml}
+                    ${qualityHtml}
                     <td>${item.sell_price_min}</td>
                     <td>${item.buy_price_max}</td>
                     <td>${new Date(item.sell_price_min_date).toLocaleString()}</td>
@@ -305,8 +321,34 @@
                 tbody.appendChild(row);
             });
 
+            body.appendChild(spacer);
             table.appendChild(tbody);
             resultsDiv.appendChild(table);
+        }
+
+        function colorizeCity(city) {
+            const colorMap = {
+                'Caerleon': 'darkred',
+                'Bridgewatch': 'darkorange',
+                'Fort Sterling': 'grey',
+                'Lymhurst': 'green',
+                'Martlock': 'blue',
+                'Thetford': 'purple'
+            };
+            const color = colorMap[city] || 'black';
+            return `<td style="color: ${color};">${city}</td>`;
+        }
+
+        function qualityDescription(quality) {
+            const qualityMap = {
+                '1': ['Normal', ''],
+                '2': ['Good', 'color: gray;'],
+                '3': ['Outstanding', 'color: saddlebrown;'],
+                '4': ['Excellent', 'color: silver;'],
+                '5': ['Masterpiece', 'color: goldenrod;']
+            };
+            const [description, style] = qualityMap[quality] || [quality, ''];
+            return `<td style="${style}">${description}</td>`;
         }
     });
 </script>
