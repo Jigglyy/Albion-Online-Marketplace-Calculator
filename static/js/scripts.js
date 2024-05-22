@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
         // Create a table element
         const table = document.createElement("table");
-        table.classList.add("table", "table-zebra", "table-xs", "w-full");
+        table.classList.add("table", "table-zebra", "w-full");
 
         // Create table header
         const thead = document.createElement("thead");
@@ -86,29 +86,29 @@ document.addEventListener("DOMContentLoaded", (event) => {
         data.forEach(item => {
             // Convert item ID to string
             const itemId = item.item_id.toString();
-        
-            // Check if the last character is a number
-            const lastChar = itemId.charAt(itemId.length - 1);
+            
+            // Check if the last two characters are "@" followed by a number
+            const lastTwoChars = itemId.slice(-2);
             let strippedItemId = itemId;
             let tierSuffix = '';
-            if (!isNaN(lastChar)) {
+            if (lastTwoChars[0] === '@' && !isNaN(lastTwoChars[1])) {
                 // Strip the first three and last two characters from the item ID
                 strippedItemId = itemId.substring(3, itemId.length - 2);
-                tierSuffix = `.${lastChar}`;
+                tierSuffix = `.${lastTwoChars[1]}`;
             } else {
                 // Strip only the first three characters
                 strippedItemId = itemId.substring(3);
             }
-        
+            
             const strippedItemTier = itemId.substring(0, 2);
             const itemName = itemsDict[strippedItemId];
             const cityHtml = colorizeCity(item.city);
             const qualityHtml = qualityDescription(item.quality);
-        
+            
             // Format sell price and buy price with commas
             const formattedSellPrice = item.sell_price_min.toLocaleString();
             const formattedBuyPrice = item.buy_price_max.toLocaleString();
-        
+            
             const row = document.createElement("tr");
             row.classList.add("prose", "hover");
             row.innerHTML = `
@@ -121,6 +121,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             `;
             tbody.appendChild(row);
         });
+        
         
         
         
