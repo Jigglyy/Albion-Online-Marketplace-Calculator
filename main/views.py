@@ -9,7 +9,7 @@ def index(request):
 
 
 def table(request):
-    items_file_path = Path(__file__).resolve().parent / 'items.json'
+    items_file_path = Path(__file__).resolve().parent.parent / 'static' / 'json' / 'items.json'
     
     with open(items_file_path) as f:
         items = json.load(f)['items']
