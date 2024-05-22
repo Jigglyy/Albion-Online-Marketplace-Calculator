@@ -46,7 +46,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
             Masterpiece: 5
         };
         const selectedQualityNumber = qualityToNumber[selectedQuality];
-        const url = `https://europe.albion-online-data.com/api/v2/stats/prices/T4_${selectedItemId},T5_${selectedItemId},T6_${selectedItemId},T7_${selectedItemId},T8_${selectedItemId}?locations=${selectedCity}&qualities=${selectedQualityNumber}`;
+        const url = `https://europe.albion-online-data.com/api/v2/stats/prices/T4_${selectedItemId},T4_${selectedItemId}@1,T4_${selectedItemId}@2,T4_${selectedItemId}@3,T4_${selectedItemId}@4,T5_${selectedItemId},T5_${selectedItemId}@1,T5_${selectedItemId}@2,T5_${selectedItemId}@3,T5_${selectedItemId}@4,T6_${selectedItemId},T6_${selectedItemId}@1,T6_${selectedItemId}@2,T6_${selectedItemId}@3,T6_${selectedItemId}@4,T7_${selectedItemId},T7_${selectedItemId}@1,T7_${selectedItemId}@2,T7_${selectedItemId}@3,T7_${selectedItemId}@4,T8_${selectedItemId},T8_${selectedItemId}@1,T8_${selectedItemId}@2,T8_${selectedItemId}@3,T8_${selectedItemId}@4?locations=${selectedCity}&qualities=${selectedQualityNumber}`;
+        console.log(url);
 
         try {
             const response = await fetch(url);
@@ -63,7 +64,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
         // Create a table element
         const table = document.createElement("table");
-        table.classList.add("table", "table-zebra", "w-full");
+        table.classList.add("table", "table-zebra", "table-xs", "w-full");
 
         // Create table header
         const thead = document.createElement("thead");
@@ -83,11 +84,23 @@ document.addEventListener("DOMContentLoaded", (event) => {
         const tbody = document.createElement("tbody");
 
         data.forEach(item => {
-            // Strip the first three characters from the item ID
+            // Convert item ID to string
             const itemId = item.item_id.toString();
-            console.log(itemId)
-            const strippedItemId = item.item_id.substring(3);
-            const strippedItemTier = item.item_id.substring(0, 2);
+        
+            // Check if the last character is a number
+            const lastChar = itemId.charAt(itemId.length - 1);
+            let strippedItemId = itemId;
+            let tierSuffix = '';
+            if (!isNaN(lastChar)) {
+                // Strip the first three and last two characters from the item ID
+                strippedItemId = itemId.substring(3, itemId.length - 2);
+                tierSuffix = `.${lastChar}`;
+            } else {
+                // Strip only the first three characters
+                strippedItemId = itemId.substring(3);
+            }
+        
+            const strippedItemTier = itemId.substring(0, 2);
             const itemName = itemsDict[strippedItemId];
             const cityHtml = colorizeCity(item.city);
             const qualityHtml = qualityDescription(item.quality);
@@ -97,9 +110,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
             const formattedBuyPrice = item.buy_price_max.toLocaleString();
         
             const row = document.createElement("tr");
-            row.classList.add("prose");
+            row.classList.add("prose", "hover");
             row.innerHTML = `
-                <td><img src="https://render.albiononline.com/v1/item/${itemId}" alt="${itemId}" title="${itemId}" style="width: 50px; height: 50px; display: block; margin-top: 5px">${strippedItemTier} ${itemName}</td>
+                <td><img src="https://render.albiononline.com/v1/item/${itemId}" alt="${itemId}" title="${itemId}" style="width: 50px; height: 50px; display: block; margin-top: 5px">${strippedItemTier}${tierSuffix} ${itemName}</td>
                 ${cityHtml}
                 ${qualityHtml}
                 <td>${formattedSellPrice}</td>
@@ -108,6 +121,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
             `;
             tbody.appendChild(row);
         });
+        
+        
         
 
         table.appendChild(tbody);

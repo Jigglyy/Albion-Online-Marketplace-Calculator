@@ -3077,6 +3077,18 @@ html {
   padding-right: 0.75rem;
 }
 
+.table-xs :not(thead):not(tfoot) tr {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.table-xs :where(th, td) {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
 .table-sm :not(thead):not(tfoot) tr {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -3139,14 +3151,6 @@ html {
   margin-top: 2rem;
 }
 
-.mt-2 {
-  margin-top: 0.5rem;
-}
-
-.mt-10 {
-  margin-top: 2.5rem;
-}
-
 .block {
   display: block;
 }
@@ -3179,18 +3183,6 @@ html {
   height: 1.25rem;
 }
 
-.h-4 {
-  height: 1rem;
-}
-
-.h-20 {
-  height: 5rem;
-}
-
-.h-80 {
-  height: 20rem;
-}
-
 .w-28 {
   width: 7rem;
 }
@@ -3205,10 +3197,6 @@ html {
 
 .w-full {
   width: 100%;
-}
-
-.w-20 {
-  width: 5rem;
 }
 
 .max-w-md {
@@ -3287,8 +3275,8 @@ html {
   padding: 1.5rem;
 }
 
-.p-10 {
-  padding: 2.5rem;
+.pb-20 {
+  padding-bottom: 5rem;
 }
 
 .pl-2 {
@@ -3301,10 +3289,6 @@ html {
 
 .pl-8 {
   padding-left: 2rem;
-}
-
-.pb-20 {
-  padding-bottom: 5rem;
 }
 
 .text-center {
