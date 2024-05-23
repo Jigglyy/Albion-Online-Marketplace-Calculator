@@ -13,6 +13,7 @@ module.exports = {
     themes: [
       "retro",
       "valentine",
+      "dracula",
     ]
   }
 }

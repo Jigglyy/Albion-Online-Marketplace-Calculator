@@ -1,6 +1,7 @@
 import json
 from django.shortcuts import render
 from pathlib import Path
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -18,3 +19,11 @@ def table(request):
 
 def tutorial(request):
     return render(request, 'tutorial.html', {'current_page': 'tutorial'})
+
+def my_endpoint(request):
+    data = {
+        "message": "Hello, world!",
+        "status": 200
+    }
+    
+    return JsonResponse(data)
