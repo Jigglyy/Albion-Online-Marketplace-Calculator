@@ -1,4 +1,5 @@
 {% extends "base.html" %} {% load custom_filters %} {% load static %} {% block content %}
+
 <div id="content-wrapper" class="bg-amber-100/50 shadow-lg">
     <div class="prose">
         <h1 class="drop-shadow-lg">Albion Online Market Data</h1>
@@ -24,7 +25,9 @@
                     class="prose select select-bordered select-sm w-full bg-amber-100 shadow-lg"
                 >
                     {% for key, value in items.items %}
-                    <option value="{{ value }}" data-key="{{ key }}">{{ value }}</option>
+                    <option value="{{ value }}" data-key="{{ key }}">
+                        {{ value }}
+                    </option>
                     {% endfor %}
                 </select>
             </div>
@@ -119,7 +122,7 @@
                     id="daily-bonus"
                     class="prose select select-bordered select-sm w-full bg-amber-100 shadow-lg"
                 >
-                    <option>None</option>
+                    <option>0%</option>
                     <option>10%</option>
                     <option>20%</option>
                 </select>
@@ -128,11 +131,11 @@
                 <label for="return-rate" class="prose label drop-shadow-lg"
                     ><h4 class="prose">Return Rate</h4></label
                 >
-                <input
+                <input 
                     id="return-rate"
                     class="prose input input-bordered select-sm w-full bg-amber-100 shadow-lg"
-                    type="number"
-                    disabled
+                    type="text"
+                    value="0%"
                 />
             </div>
         </div>
@@ -173,27 +176,46 @@
                 </select>
             </div>
         </div>
+        <!-- City to Sell -->
         <div class="col-span-1 lg:col-span-1">
             <label for="city-price-selection" class="prose label drop-shadow-lg"
-                    ><h4 class="prose">City to Sell</h4></label
-                >
-                <select
-                    id="city-price-selection"
-                    class="prose select select-bordered select-sm w-full bg-amber-100 shadow-lg"
-                >
-                    <option>Bridgewatch</option>
-                    <option>Fort Sterling</option>
-                    <option>Lymhurst</option>
-                    <option>Caerleon</option>
-                    <option>Martlock</option>
-                    <option>Thetford</option>
-                    <option>Brecilien</option>
-                </select>
+                ><h4 class="prose">City to Sell</h4></label
+            >
+            <select
+                id="city-price-selection"
+                class="prose select select-bordered select-sm w-full bg-amber-100 shadow-lg"
+            >
+                <option>Bridgewatch</option>
+                <option>Fort Sterling</option>
+                <option>Lymhurst</option>
+                <option>Caerleon</option>
+                <option>Martlock</option>
+                <option>Thetford</option>
+                <option>Brecilien</option>
+            </select>
             <label for="focus-check" class="prose label drop-shadow-lg mt-12"
-                    ><h4 class="prose">Use Focus</h4><input type="checkbox" checked="unchecked" id="focus-check" class="checkbox mr-8 mb-1"/></label
-                >
+                ><h4 class="prose">Use Focus</h4>
+                <input
+                    type="checkbox"
+                    checked="unchecked"
+                    id="focus-check"
+                    class="checkbox mr-8 mb-1"
+            /></label>
         </div>
-        <!-- Search Button -->
+        <!--City or Hideout Crafting -->
+        <div class="col-span-1 lg:col-span-1 drop-shadow-lg">
+            <label for="city-hideout-craft" class="prose label drop-shadow-lg"
+                ><h4 class="prose">Crafting Bonus</h4></label
+            >
+            <select
+                id="city-hideout-craft"
+                class="prose select select-bordered select-sm w-full bg-amber-100 shadow-lg"
+            >
+                <option>City Bonus</option>
+                <option>Hideout Bonus</option>
+            </select>
+        </div>
+        <!-- Search Button & Craft At -->
         <div class="col-span-1 lg:col-span-2 space-y-4 p-2 drop-shadow-lg">
             <button
                 type="submit"
@@ -203,7 +225,6 @@
                 Search
             </button>
         </div>
-        <!-- City -->
     </div>
     <div class="bg-base-content/10 my-10 h-2"></div>
 </div>
@@ -213,6 +234,6 @@
     const itemsDict = {{ items|safe }};
 </script>
 
-<script src="{% static 'js/scripts.js' %}?v=1.40"></script>
+<script src="{% static 'js/scripts.js' %}?v=1.42"></script>
 
 {% endblock content %}

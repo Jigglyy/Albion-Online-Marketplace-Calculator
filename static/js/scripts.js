@@ -1,7 +1,41 @@
-document.addEventListener("DOMContentLoaded", (event) => {
+document.addEventListener("DOMContentLoaded", async (event) => {
+    const itemSelect = document.getElementById("item-select");
+    const itemImage = document.getElementById("item-image");
+    const stationFeeInput = document.getElementById("station-fee");
+    const searchButton = document.getElementById("search-button");
+    const qualitySelect = document.getElementById("quality-select");
+    const cityPriceSelection = document.getElementById("city-price-selection");
+    const zoneSelect = document.getElementById("zone-select");
+    const hoPowerSelect = document.getElementById("ho-power");
+    const dailyBonusSelect = document.getElementById("daily-bonus");
+    const focusCheck = document.getElementById("focus-check");
+    const returnRateInput = document.getElementById("return-rate");
+    const craftingBonusSelect = document.getElementById("city-hideout-craft");
+
+    let craftingBonusData = null;
+
+    // Load crafting_bonus.json
+    try {
+        const response = await fetch('/static/json/crafting_bonus.json');
+        craftingBonusData = await response.json();
+    } catch (error) {
+        console.error("Error loading crafting bonus data:", error);
+    }
+
+    // Initialize the image with the first item's image
+    updateItemImage();
+
+    // Attach event listeners
+    itemSelect.addEventListener("change", updateItemImage);
+    stationFeeInput.addEventListener("change", updateStationFee);
+    searchButton.addEventListener("click", fetchAndDisplayResults);
+    zoneSelect.addEventListener("change", updateReturnRate);
+    hoPowerSelect.addEventListener("change", updateReturnRate);
+    dailyBonusSelect.addEventListener("change", updateReturnRate);
+    focusCheck.addEventListener("change", updateReturnRate);
+    craftingBonusSelect.addEventListener("change", updateUIState);
+
     function updateItemImage() {
-        const itemSelect = document.getElementById("item-select");
-        const itemImage = document.getElementById("item-image");
         const selectedItemId = itemSelect.value;
         const baseUrl = "https://render.albiononline.com/v1/item/";
 
@@ -10,34 +44,49 @@ document.addEventListener("DOMContentLoaded", (event) => {
         itemImage.title = selectedItemId;
     }
 
-    // Attach the event listener to the select element
-    const itemSelect = document.getElementById("item-select");
-    itemSelect.addEventListener("change", updateItemImage);
-
-    // Initialize the image with the first item's image
-    updateItemImage();
-
     function updateStationFee() {
-        const stationFee = document.getElementById("station-fee");
-
-        if (stationFee.value > 1000) {
-            stationFee.value = 1000;
-        } else if (stationFee.value < 0) {
-            stationFee.value = 0;
+        if (stationFeeInput.value > 1000) {
+            stationFeeInput.value = 1000;
+        } else if (stationFeeInput.value < 0) {
+            stationFeeInput.value = 0;
         }
     }
 
-    // Attach the event listener to the station fee input element
-    const stationFeeInput = document.getElementById("station-fee");
-    stationFeeInput.addEventListener("change", updateStationFee);
+    function updateUIState() {
+        const isHideoutBonus = craftingBonusSelect.value === "Hideout Bonus";
+        zoneSelect.disabled = !isHideoutBonus;
+        hoPowerSelect.disabled = !isHideoutBonus;
+        updateReturnRate();
+    }
 
-    // Handle the search button click
-    const searchButton = document.getElementById("search-button");
-    searchButton.addEventListener("click", async () => {
+    function updateReturnRate() {
+        const zoneQuality = zoneSelect.value;
+        const hideoutPower = hoPowerSelect.value;
+        const dailyBonus = dailyBonusSelect.value;
+        const useFocus = focusCheck.checked;
+        const isHideoutBonus = craftingBonusSelect.value === "Hideout Bonus";
+
+        let baseRate;
+
+        if (useFocus) {
+            baseRate = isHideoutBonus ? craftingBonusData.Focus[hideoutPower][zoneQuality] : "47,90%";
+        } else {
+            baseRate = isHideoutBonus ? craftingBonusData.NoFocus[hideoutPower][zoneQuality] : "24,80%";
+        }
+
+        baseRate = parseFloat(baseRate.replace(',', '.'));
+
+        if (dailyBonus !== "None") {
+            baseRate += parseFloat(dailyBonus.replace('%', ''));
+        }
+
+        returnRateInput.value = baseRate.toFixed(2) + "%";
+    }
+
+    async function fetchAndDisplayResults() {
         const selectedItemId = itemSelect.options[itemSelect.selectedIndex].getAttribute("data-key");
-        const qualitySelect = document.getElementById("quality-select");
         const selectedQuality = qualitySelect.value;
-        const selectedCity = document.getElementById("city-price-selection").value;
+        const selectedCity = cityPriceSelection.value;
         const qualityToNumber = {
             Normal: 1,
             Good: 2,
@@ -56,7 +105,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         } catch (error) {
             console.error("Error fetching data:", error);
         }
-    });
+    }
 
     function displayResults(data) {
         const resultsDiv = document.getElementById("results");
@@ -70,13 +119,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
         const thead = document.createElement("thead");
         thead.innerHTML = `
             <tr class="prose">
-                <th>Item</th>
-                <th></th>
+                <th>Item ID</th>
                 <th>City</th>
                 <th>Quality</th>
                 <th>Sell Price</th>
                 <th>Buy Price</th>
                 <th>Updated</th>
+                <th>Profit</th>
             </tr>
         `;
         table.appendChild(thead);
@@ -113,8 +162,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             const row = document.createElement("tr");
             row.classList.add("prose", "hover");
             row.innerHTML = `
-                <td>${strippedItemTier}${tierSuffix} ${itemName}</td>
-                <td><img src="https://render.albiononline.com/v1/item/${itemId}" alt="${itemId}" title="${itemId}" style="width: 50px; height: 50px; display: block;"></td>
+                <td><img src="https://render.albiononline.com/v1/item/${itemId}" alt="${itemId}" title="${itemId}" style="width: 50px; height: 50px; display: block; margin-top: 5px">${strippedItemTier}${tierSuffix} ${itemName}</td>
                 ${cityHtml}
                 ${qualityHtml}
                 <td>${formattedSellPrice}</td>
@@ -123,10 +171,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
             `;
             tbody.appendChild(row);
         });
-        
-        
-        
-        
 
         table.appendChild(tbody);
         resultsDiv.appendChild(table);
@@ -156,4 +200,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         const [description, style] = qualityMap[quality] || [quality, ''];
         return `<td style="${style}">${description}</td>`;
     }
+
+    // Initialize the UI state
+    updateUIState();
 });
