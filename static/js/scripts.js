@@ -70,7 +70,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
         const thead = document.createElement("thead");
         thead.innerHTML = `
             <tr class="prose">
-                <th>Item ID</th>
+                <th>Item</th>
+                <th></th>
                 <th>City</th>
                 <th>Quality</th>
                 <th>Sell Price</th>
@@ -112,7 +113,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
             const row = document.createElement("tr");
             row.classList.add("prose", "hover");
             row.innerHTML = `
-                <td><img src="https://render.albiononline.com/v1/item/${itemId}" alt="${itemId}" title="${itemId}" style="width: 50px; height: 50px; display: block; margin-top: 5px">${strippedItemTier}${tierSuffix} ${itemName}</td>
+                <td>${strippedItemTier}${tierSuffix} ${itemName}</td>
+                <td><img src="https://render.albiononline.com/v1/item/${itemId}" alt="${itemId}" title="${itemId}" style="width: 50px; height: 50px; display: block;"></td>
                 ${cityHtml}
                 ${qualityHtml}
                 <td>${formattedSellPrice}</td>
