@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
 
     // Load crafting_bonus.json
     try {
-        const response = await fetch('/static/json/crafting_bonus.json');
+        const response = await fetch("/static/json/crafting_bonus.json");
         craftingBonusData = await response.json();
     } catch (error) {
         console.error("Error loading crafting bonus data:", error);
@@ -69,22 +69,29 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         let baseRate;
 
         if (useFocus) {
-            baseRate = isHideoutBonus ? craftingBonusData.Focus[hideoutPower][zoneQuality] : "47,90%";
+            baseRate = isHideoutBonus
+                ? craftingBonusData.Focus[hideoutPower][zoneQuality]
+                : "47,90%";
         } else {
-            baseRate = isHideoutBonus ? craftingBonusData.NoFocus[hideoutPower][zoneQuality] : "24,80%";
+            baseRate = isHideoutBonus
+                ? craftingBonusData.NoFocus[hideoutPower][zoneQuality]
+                : "24,80%";
         }
 
-        baseRate = parseFloat(baseRate.replace(',', '.'));
+        baseRate = parseFloat(baseRate.replace(",", "."));
 
         if (dailyBonus !== "None") {
-            baseRate += parseFloat(dailyBonus.replace('%', ''));
+            baseRate += parseFloat(dailyBonus.replace("%", ""));
         }
 
         returnRateInput.value = baseRate.toFixed(2) + "%";
     }
 
     async function fetchAndDisplayResults() {
-        const selectedItemId = itemSelect.options[itemSelect.selectedIndex].getAttribute("data-key");
+        const selectedItemId =
+            itemSelect.options[itemSelect.selectedIndex].getAttribute(
+                "data-key"
+            );
         const selectedQuality = qualitySelect.value;
         const selectedCity = cityPriceSelection.value;
         const qualityToNumber = {
@@ -92,7 +99,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
             Good: 2,
             Outstanding: 3,
             Excellent: 4,
-            Masterpiece: 5
+            Masterpiece: 5,
         };
         const selectedQualityNumber = qualityToNumber[selectedQuality];
         const url = `https://europe.albion-online-data.com/api/v2/stats/prices/T4_${selectedItemId},T4_${selectedItemId}@1,T4_${selectedItemId}@2,T4_${selectedItemId}@3,T4_${selectedItemId}@4,T5_${selectedItemId},T5_${selectedItemId}@1,T5_${selectedItemId}@2,T5_${selectedItemId}@3,T5_${selectedItemId}@4,T6_${selectedItemId},T6_${selectedItemId}@1,T6_${selectedItemId}@2,T6_${selectedItemId}@3,T6_${selectedItemId}@4,T7_${selectedItemId},T7_${selectedItemId}@1,T7_${selectedItemId}@2,T7_${selectedItemId}@3,T7_${selectedItemId}@4,T8_${selectedItemId},T8_${selectedItemId}@1,T8_${selectedItemId}@2,T8_${selectedItemId}@3,T8_${selectedItemId}@4?locations=${selectedCity}&qualities=${selectedQualityNumber}`;
@@ -133,15 +140,15 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         // Create table body
         const tbody = document.createElement("tbody");
 
-        data.forEach(item => {
+        data.forEach((item) => {
             // Convert item ID to string
             const itemId = item.item_id.toString();
-            
+
             // Check if the last two characters are "@" followed by a number
             const lastTwoChars = itemId.slice(-2);
             let strippedItemId = itemId;
-            let tierSuffix = '';
-            if (lastTwoChars[0] === '@' && !isNaN(lastTwoChars[1])) {
+            let tierSuffix = "";
+            if (lastTwoChars[0] === "@" && !isNaN(lastTwoChars[1])) {
                 // Strip the first three and last two characters from the item ID
                 strippedItemId = itemId.substring(3, itemId.length - 2);
                 tierSuffix = `.${lastTwoChars[1]}`;
@@ -149,16 +156,16 @@ document.addEventListener("DOMContentLoaded", async (event) => {
                 // Strip only the first three characters
                 strippedItemId = itemId.substring(3);
             }
-            
+
             const strippedItemTier = itemId.substring(0, 2);
             const itemName = itemsDict[strippedItemId];
             const cityHtml = colorizeCity(item.city);
             const qualityHtml = qualityDescription(item.quality);
-            
+
             // Format sell price and buy price with commas
             const formattedSellPrice = item.sell_price_min.toLocaleString();
             const formattedBuyPrice = item.buy_price_max.toLocaleString();
-            
+
             const row = document.createElement("tr");
             row.classList.add("prose", "hover");
             row.innerHTML = `
@@ -178,26 +185,26 @@ document.addEventListener("DOMContentLoaded", async (event) => {
 
     function colorizeCity(city) {
         const colorMap = {
-            'Caerleon': 'darkred',
-            'Bridgewatch': 'darkorange',
-            'Fort Sterling': 'grey',
-            'Lymhurst': 'green',
-            'Martlock': 'blue',
-            'Thetford': 'purple'
+            Caerleon: "darkred",
+            Bridgewatch: "darkorange",
+            "Fort Sterling": "grey",
+            Lymhurst: "green",
+            Martlock: "blue",
+            Thetford: "purple",
         };
-        const color = colorMap[city] || 'black';
+        const color = colorMap[city] || "black";
         return `<td style="color: ${color};">${city}</td>`;
     }
 
     function qualityDescription(quality) {
         const qualityMap = {
-            '1': ['Normal', ''],
-            '2': ['Good', 'color: gray;'],
-            '3': ['Outstanding', 'color: saddlebrown;'],
-            '4': ['Excellent', 'color: silver;'],
-            '5': ['Masterpiece', 'color: goldenrod;']
+            1: ["Normal", ""],
+            2: ["Good", "color: gray;"],
+            3: ["Outstanding", "color: saddlebrown;"],
+            4: ["Excellent", "color: silver;"],
+            5: ["Masterpiece", "color: goldenrod;"],
         };
-        const [description, style] = qualityMap[quality] || [quality, ''];
+        const [description, style] = qualityMap[quality] || [quality, ""];
         return `<td style="${style}">${description}</td>`;
     }
 

@@ -131,7 +131,7 @@
                 <label for="return-rate" class="prose label drop-shadow-lg"
                     ><h4 class="prose">Return Rate</h4></label
                 >
-                <input 
+                <input
                     id="return-rate"
                     class="prose input input-bordered select-sm w-full bg-amber-100 shadow-lg"
                     type="text"
@@ -202,7 +202,7 @@
             /></label>
         </div>
         <!--City or Hideout Crafting -->
-        <div class="col-span-1 lg:col-span-1 drop-shadow-lg">
+        <div class="col-span-1 lg:col-span-1">
             <label for="city-hideout-craft" class="prose label drop-shadow-lg"
                 ><h4 class="prose">Crafting Bonus</h4></label
             >
@@ -213,8 +213,19 @@
                 <option>City Bonus</option>
                 <option>Hideout Bonus</option>
             </select>
+            <label for="server-selection" class="prose label drop-shadow-lg mt-4"
+                ><h4 class="prose">Crafting Bonus</h4></label
+            >
+            <select
+                id="server-selection"
+                class="prose select select-bordered select-sm w-full bg-amber-100 shadow-lg"
+            >
+                <option>Europe</option>
+                <option>West</option>
+                <option>East</option>
+            </select>
         </div>
-        <!-- Search Button & Craft At -->
+        <!-- Search Button -->
         <div class="col-span-1 lg:col-span-2 space-y-4 p-2 drop-shadow-lg">
             <button
                 type="submit"
