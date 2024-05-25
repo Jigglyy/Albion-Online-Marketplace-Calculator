@@ -15,13 +15,5 @@
             "src": "/(.*)",
             "dest": "albiondata/wsgi.py"
         }
-    ],
-    "build": {
-        "env": {
-            "DJANGO_SETTINGS_MODULE": "albiondata.settings"
-        },
-        "commands": [
-            "python manage.py collectstatic --noinput"
-        ]
-    }
+    ]
 }
