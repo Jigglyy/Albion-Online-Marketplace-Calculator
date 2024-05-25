@@ -168,6 +168,7 @@
                 <select
                     id="sell-mats"
                     class="prose select select-bordered select-sm w-full bg-amber-100 shadow-lg"
+                    disabled
                 >
                     <option>Bridgewatch</option>
                     <option>Fort Sterling</option>
@@ -216,11 +217,11 @@
                 <option>City Bonus</option>
                 <option>Hideout Bonus</option>
             </select>
-            <label for="server-selection" class="prose label drop-shadow-lg mt-4"
+            <label for="server-select" class="prose label drop-shadow-lg mt-4"
                 ><h4 class="prose">Server</h4></label
             >
             <select
-                id="server-selection"
+                id="server-select"
                 class="prose select select-bordered select-sm w-full bg-amber-100 shadow-lg"
             >
                 <option>Europe</option>
@@ -247,6 +248,6 @@
     const itemsDict = {{ items|safe }};
 </script>
 
-<script src="{% static 'js/scripts.js' %}?v=1.61"></script>
+<script src="{% static 'js/scripts.js' %}?v=1.63"></script>
 
 {% endblock content %}
