@@ -8,6 +8,10 @@
         {
             "src": "/(.*)",
             "dest": "albiondata/wsgi.py"
+        },
+        {
+            "src": "/static/(.*)",
+            "dest": "static/$1"
         }
     ]
 }
