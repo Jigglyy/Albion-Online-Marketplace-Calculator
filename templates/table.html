@@ -39,8 +39,10 @@
                     id="quantity-select"
                     type="number"
                     placeholder="Quantity"
+                    value="1"
                     class="prose input input-bordered w-full bg-amber-100 shadow-lg"
                     max="1000"
+                    
                 />
             </div>
         </div>
@@ -69,6 +71,7 @@
                     id="station-fee"
                     type="number"
                     placeholder="0-1000"
+                    value="1000"
                     class="prose input input-bordered w-full bg-amber-100 shadow-lg"
                     max="1000"
                 />
@@ -214,7 +217,7 @@
                 <option>Hideout Bonus</option>
             </select>
             <label for="server-selection" class="prose label drop-shadow-lg mt-4"
-                ><h4 class="prose">Crafting Bonus</h4></label
+                ><h4 class="prose">Server</h4></label
             >
             <select
                 id="server-selection"
@@ -244,6 +247,6 @@
     const itemsDict = {{ items|safe }};
 </script>
 
-<script src="{% static 'js/scripts.js' %}?v=1.42"></script>
+<script src="{% static 'js/scripts.js' %}?v=1.61"></script>
 
 {% endblock content %}
