@@ -5,8 +5,8 @@ Albion Online Market Mastery is a private project designed to help players track
 ## Features
 
 - **Real-time Market Data**: Collect and analyze market prices from different cities in Albion Online.
-- **Historical Data Analysis**: Track price trends over time.
-- **Upcoming Features**: Crafting calculators for items/food/potions, historical price annotations.
+- ~~**Historical Data Analysis**: Track price trends over time.~~
+- ~~**Upcoming Features**: Crafting calculators for items/food/potions, historical price annotations.~~
 
 ## Technology Stack
 
@@ -14,3 +14,7 @@ Albion Online Market Mastery is a private project designed to help players track
 - **Tailwind CSS**: Utility-first CSS framework
 - **DaisyUI**: Tailwind CSS component library
 - **Albion Data Client**: Data collection tool
+
+## How to Run
+
+```python manage.py runserver```
