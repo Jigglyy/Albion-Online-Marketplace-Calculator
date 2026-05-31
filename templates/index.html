@@ -1,0 +1,134 @@
+<!-- templates/index.html -->
+
+{% extends "base.html" %} {% load custom_filters %} {% block content %}
+<div class="h-12"></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="p-4 pl-8">
+        <!-- Hero section -->
+        <div
+            class="prose prose-lg hero-content text-center drop-shadow-2xl rounded-2xl bg-amber-100 bg-opacity-65"
+        >
+            <div class="max-w-md">
+                <h1 class="drop-shadow-lg">Albion Online Market Mastery</h1>
+                <p>
+                    Unleash your trading potential with real-time market
+                    data from every city. Make informed decisions and
+                    dominate the Albion economy!
+                </p>
+                <button
+                    class="btn btn-primary drop-shadow-lg"
+                    onclick="window.location.href = '/table';"
+                >
+                    Explore Market Data
+                </button>
+                <button
+                    class="btn btn-secondary drop-shadow-lg"
+                    onclick="window.location.href = '/tutorial';"
+                >
+                    Learn More & How It Works
+                </button>
+            </div>
+        </div>
+        <!-- Upcoming features section -->
+        <div class="h-12"></div>
+        <div class="p-12">
+            <div
+                class="prose prose-sm hero-content text-center drop-shadow-2xl rounded-2xl bg-amber-200 bg-opacity-65"
+            >
+                <div>
+                    <h1 class="drop-shadow-lg">Upcoming Features</h1>
+                    <h3 class="drop-shadow-lg">
+                        New Features that will be added in the future:
+                    </h3>
+                    <ul class="list-disc list-inside text-start">
+                        <li>
+                            Crafting Calculator for Items ⚔, Food 🍔, and
+                            Potions 🧪
+                        </li>
+                        <li>Historical Price Increase/Decrease Annotations 📈</li>
+                        <li>
+                            Market Trend Data Analysis 📊
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="prose prose-2xl p-6 pl-32">
+        <!-- Example Live Data section -->
+        <h2 class="drop-shadow-lg">Example Live Data from Bridgewatch and Caerleon</h2>
+        <table
+            class="bg-amber-200 bg-opacity-65 shadow-2xl rounded-lg table table-sm"
+        >
+            <tbody>
+                <tr class="text-center hover">
+                    <th>Item ID</th>
+                    <th>City</th>
+                    <th>Quality</th>
+                    <th>Sell Price</th>
+                    <th>Buy Price</th>
+                    <th>Updated</th>
+                </tr>
+                <!-- Bridgewatch data -->
+                <tr class="text-center hover">
+                    <td>{{ "T4_BAG"|item_image }}</td>
+                    {{ "Bridgewatch"|colorize_city }}
+                    <td>{{ 1|quality_description}}</td>
+                    <td>4,299</td>
+                    <td>1,013</td>
+                    <td>5/22/2024, 4:25:00 PM</td>
+                </tr>
+                <tr class="text-center hover">
+                    <td>{{ "T4_BAG"|item_image }}</td>
+                    {{ "Bridgewatch"|colorize_city }}
+                    <td>{{ 2|quality_description}}</td>
+                    <td>4,302</td>
+                    <td>2,715</td>
+                    <td>5/22/2024, 4:25:00 PM</td>
+                </tr>
+                <tr class="text-center hover">
+                    <td>{{ "T4_BAG"|item_image }}</td>
+                    {{ "Bridgewatch"|colorize_city }}
+                    <td>{{ 3|quality_description}}</td>
+                    <td>4,379</td>
+                    <td>1,030</td>
+                    <td>5/22/2024, 4:25:00 PM</td>
+                </tr>
+                <tr class="text-center hover">
+                    <td>{{ "T4_BAG"|item_image }}</td>
+                    {{ "Bridgewatch"|colorize_city }}
+                    <td>{{ 4|quality_description}}</td>
+                    <td>5,599</td>
+                    <td>2,753</td>
+                    <td>5/22/2024, 3:50:00 PM</td>
+                </tr>
+                <tr class="text-center hover">
+                    <td>{{ "T4_BAG"|item_image }}</td>
+                    {{ "Bridgewatch"|colorize_city }}
+                    <td>{{ 5|quality_description}}</td>
+                    <td>13,788</td>
+                    <td>4,011</td>
+                    <td>5/22/2024, 6:50:00 PM</td>
+                </tr>
+                <!-- Caerleon data -->
+                <tr class="text-center hover">
+                    <td>{{ "T4_BAG"|item_image }}</td>
+                    {{ "Caerleon"|colorize_city }}
+                    <td>{{ 1|quality_description}}</td>
+                    <td>4,300</td>
+                    <td>1,400</td>
+                    <td>5/22/2024, 5:25:00 PM</td>
+                </tr>
+                <tr class="text-center hover">
+                    <td>{{ "T4_BAG"|item_image }}</td>
+                    {{ "Caerleon"|colorize_city }}
+                    <td>{{ 2|quality_description}}</td>
+                    <td>4,412</td>
+                    <td>1,413</td>
+                    <td>5/22/2024, 4:15:00 PM</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}

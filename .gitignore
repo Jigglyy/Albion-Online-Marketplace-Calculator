@@ -1,0 +1,28 @@
+# Claude Code agent files
+.claude/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Django
+db.sqlite3
+db.sqlite3-journal
+/staticfiles/
+
+# Node / Tailwind
+node_modules/
+
+# Environment / secrets
+.env
+.env.*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
